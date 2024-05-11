@@ -2,6 +2,7 @@ package com.fastlearn.mediauploader;
 
 import com.fastlearn.mediauploader.service.MediaUploaderService;
 import java.io.IOException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -33,6 +34,7 @@ public class MediaUploaderController {
   @GetMapping("/retrieve/{courseId}")
   public ResponseEntity<Resource> showImage(@PathVariable Long courseId)
       throws IOException {
+
     Resource resource = mediaUploaderService.loadImage(courseId);
 
     HttpHeaders headers = new HttpHeaders();
@@ -41,6 +43,11 @@ public class MediaUploaderController {
     return ResponseEntity.ok()
         .headers(headers)
         .body(resource);
+  }
+
+  @GetMapping(path = "/findAllByCourseId/{courseId}")
+  public List<String> getAllImagesId(@PathVariable Long courseId) {
+    return mediaUploaderService.getImageId(courseId);
   }
 
 /*  @GetMapping("/download/{fileName:.+}")
