@@ -9,10 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Builder
-public class Video {
+public class FileUpload {
 
-  private String id;
-  private String title;
-  private String code;
+
+  private Long id;
+  private String name;
+  private String path;
+  private Long courseId;
+
 
 }

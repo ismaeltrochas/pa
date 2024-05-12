@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: mcsv-course
@@ -5,12 +8,15 @@ spring:
     url: ${DB_URL}
     username: ismael
     password: Test123
-  flyway:
-    url: ${DB_URL}
-    username: ismael
-    password: Test123
-    createSchemas: true
-    schemas: public
+  jpa:
+    hibernate:
+      ddl-auto: create
+  #flyway:
+  #  url: ${DB_URL}
+  #  username: ismael
+  #  password: Test123
+  #  createSchemas: true
+  #  schemas: public
 eureka:
   client:
     service-url:

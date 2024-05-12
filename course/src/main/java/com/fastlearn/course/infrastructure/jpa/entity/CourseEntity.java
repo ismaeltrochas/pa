@@ -28,9 +28,5 @@ public class CourseEntity {
   private String description;
   private String owner;
   private Double price;
-  @OneToMany(mappedBy = "courseId")
-  @JsonIgnore // Evita la serialización de los hijos en bucle
-  private List<CourseContentEntity> courseContent;
-
 
 }
