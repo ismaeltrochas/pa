@@ -3,7 +3,9 @@ package com.fastlearn.mediauploader.infrastructure.rest;
 import com.fastlearn.mediauploader.application.video.service.FileUploadManagementService;
 import com.fastlearn.mediauploader.domain.model.dto.FileUploadDTO;
 import com.fastlearn.mediauploader.infrastructure.jpa.adapter.GetFileUploadAdapter;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,13 +27,15 @@ public class FileUploadController {
   private final FileUploadManagementService fileUploadManagementService;
   private final GetFileUploadAdapter getFileUploadAdapter;
 
+
   @PostMapping(path = "/upload-content/{id}")
-  public ResponseEntity<FileUploadDTO> uploadFile(
+  public ResponseEntity<List<FileUploadDTO>> uploadFile(
       @PathVariable("id") Long id,
-      @RequestPart MultipartFile file) {
-    log.info("Uploading file with name: {}", file.getOriginalFilename());
-    return new ResponseEntity<>(fileUploadManagementService.uploadFile(id, file),
-        HttpStatus.OK);
+      @RequestPart MultipartFile[] file) {
+    return new ResponseEntity<>(Arrays.stream(file)
+        .map(files -> fileUploadManagementService.uploadFile(id, files))
+        .collect(Collectors.toList()),
+        HttpStatus.CREATED);
   }
 
   @GetMapping(path = "/get/{id}")

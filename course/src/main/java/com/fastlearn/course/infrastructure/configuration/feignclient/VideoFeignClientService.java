@@ -14,11 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 public interface VideoFeignClientService {
 
   @PostMapping(
-      path = "/upload-content/{courseContentId}",
+      path = "/upload-content/{id}",
       consumes = MediaType.MULTIPART_FORM_DATA_VALUE
   )
   FileUploadDTO uploadFile(
-      @PathVariable("courseContentId") Long courseContentId,
+      @PathVariable("id") Long courseContentId,
       @RequestPart MultipartFile file);
 
   @GetMapping(path = "/get/{id}")
