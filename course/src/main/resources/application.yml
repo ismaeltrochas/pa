@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: mcsv-course
+    name: fl-mcsv-course
   datasource:
     url: ${DB_URL}
     username: ismael

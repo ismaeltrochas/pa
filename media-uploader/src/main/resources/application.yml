@@ -18,6 +18,7 @@ spring:
     password: Test123
     test-on-borrow: false
     validation-query: SELECT 1 FROM dual
+
 eureka:
   client:
     service-url:

@@ -13,6 +13,7 @@
 	<name>media-uploader</name>
 	<description>Spring Boot project made for the storage of multi media</description>
 	<properties>
+		<spring-cloud.version>2023.0.1</spring-cloud.version>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
@@ -52,7 +53,23 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 		</dependency>
-  </dependencies>
+	<dependency>
+		<groupId>org.springframework.cloud</groupId>
+		<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+	</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
