@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping(path = "/file-upload")
+@RequestMapping(path = "/api/file-upload")
 @RequiredArgsConstructor
 @Slf4j
 public class VideoController {
