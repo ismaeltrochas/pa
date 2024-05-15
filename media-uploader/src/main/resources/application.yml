@@ -18,7 +18,10 @@ spring:
     password: Test123
     test-on-borrow: false
     validation-query: SELECT 1 FROM dual
-
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 eureka:
   client:
     service-url:

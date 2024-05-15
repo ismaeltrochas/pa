@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UploadVideoAdapter implements UploadVideoPort {
@@ -14,7 +16,7 @@ public class UploadVideoAdapter implements UploadVideoPort {
   private final VideoFeignClientService videoFeignClientService;
 
   @Override
-  public FileUploadDTO fileUploadDTO(Long courseId, MultipartFile file) {
+  public List<FileUploadDTO> fileUploadDTO(Long courseId, MultipartFile file) {
     return videoFeignClientService.uploadFile(courseId, file);
   }
 

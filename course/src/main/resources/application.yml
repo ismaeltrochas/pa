@@ -10,13 +10,11 @@ spring:
     password: Test123
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   #flyway:
-  #  url: ${DB_URL}
+  #  url: jdbc:postgresql://localhost:5434/db-course
   #  username: ismael
   #  password: Test123
-  #  createSchemas: true
-  #  schemas: public
 eureka:
   client:
     service-url:

@@ -7,15 +7,22 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: fl-mcsv-course
-          uri: lb://fl-mcsv-course
+        - id: FL-MCSV-COURSE
+          uri: lb://FL-MCSV-COURSE
           predicates:
-            -Path=/api/**
+            - Path=/api/course/**
 
-        - id: fl-mcsv-media
-          uri: lb://fl-mcsv-media
+        - id: FL-MCSV-COURSE_CONTENT
+          uri: lb://FL-MCSV-COURSE
           predicates:
-            -Path=/api/file-upload/**
+            - Path=/api/course-content/**
+
+        - id: FL-MCSV-MEDIA
+          uri: lb://FL-MCSV-MEDIA
+          predicates:
+            - Path=/api/file-upload/**
+            - Method=POST
+
 eureka:
   client:
     service-url:
