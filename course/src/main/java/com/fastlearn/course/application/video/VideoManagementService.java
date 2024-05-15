@@ -17,7 +17,7 @@ public class VideoManagementService implements UploadFileUseCase, GetUploadFileU
   private final GetVideoPort getVideoPort;
 
   @Override
-  public FileUploadDTO uploadFile(Long courseId, MultipartFile file) {
+  public List<FileUploadDTO> uploadFile(Long courseId, MultipartFile file) {
     return uploadVideoPort.fileUploadDTO(courseId, file);
   }
 
