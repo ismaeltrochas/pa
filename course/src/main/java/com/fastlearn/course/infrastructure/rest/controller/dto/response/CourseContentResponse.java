@@ -15,4 +15,5 @@ public class CourseContentResponse {
   private String id;
   private String name;
   private List<VideoResponse> videoResponses;
+
 }
