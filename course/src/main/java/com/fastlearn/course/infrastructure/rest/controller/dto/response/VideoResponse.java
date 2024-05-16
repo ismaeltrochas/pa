@@ -13,5 +13,7 @@ public class VideoResponse {
 
   private String id;
   private String title;
+  private String code;
+  private byte[] content;
 
 }

@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CourseContentDTO {
 
-  private String name;
-  private CourseDTO courseId;
+  private String title;
+  private CourseDTO course;
   private LocalDateTime createdAt;
 }
