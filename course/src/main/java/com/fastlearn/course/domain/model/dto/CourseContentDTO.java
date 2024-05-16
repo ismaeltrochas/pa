@@ -1,18 +1,20 @@
 package com.fastlearn.course.domain.model.dto;
 
-import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Builder
+@Setter
 public class CourseContentDTO {
 
-  private String title;
-  private CourseDTO course;
-  private LocalDateTime createdAt;
+    private String title;
+    private CourseDTO course;
+    private LocalDateTime createdAt;
 }

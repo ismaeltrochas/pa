@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class VideoResponse {
 
-  private String id;
   private String title;
-  private String code;
+  private String path;
   private byte[] content;
 
 }

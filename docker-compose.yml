@@ -82,6 +82,6 @@ services:
       POSTGRES_USER: ismael
       POSTGRES_PASSWORD: Test123
     ports:
-      - "5434:5434"
+      - "5436:5436"
     command:
-      -p 5434
+      -p 5436
