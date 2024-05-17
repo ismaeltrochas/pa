@@ -18,4 +18,5 @@ public class Course {
   private String owner;
   private Double price;
   private List<CourseContent> courseContents;
+  private Status status;
 }
