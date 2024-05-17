@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: fl-mcsv-users
+
+
+keycloak:
+  server_url: http://localhost:8181
+  realm_name: spring-courses
+  realm_master: master
+  admin-cli: admin-cli
+  user-console: admin
+  password-console: admin
+  client-secret: admin
