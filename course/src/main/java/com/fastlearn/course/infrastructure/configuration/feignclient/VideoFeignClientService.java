@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
-@FeignClient(name = "fl-mcsv-media", url = "http://localhost:8082/api/file-upload/")
+@FeignClient(name = "fl-mcsv-media", url = "http://localhost:8082/api/file-upload")
 public interface VideoFeignClientService {
 
   @PostMapping(
@@ -23,4 +23,8 @@ public interface VideoFeignClientService {
 
   @GetMapping(path = "/get/{id}")
   List<FileUploadDTO> getFileById(@PathVariable("id") Long id);
+
+  @GetMapping(path = "/get/greetings")
+  String greetings();
+
 }

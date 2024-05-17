@@ -1,15 +1,12 @@
 package com.fastlearn.course.infrastructure.jpa.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -18,13 +15,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CourseContentEntity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  private String name;
-  @ManyToOne
-  @JoinColumn(name = "course_id")
-  private CourseEntity course;
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String title;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private CourseEntity course;
+    private LocalDateTime createdAt;
 
 }

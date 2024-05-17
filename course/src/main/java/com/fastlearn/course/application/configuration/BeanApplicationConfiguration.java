@@ -26,10 +26,11 @@ public class BeanApplicationConfiguration {
   public CourseContentManagementService courseContentManagementService(
       CreateCourseContentPort createCourseContentPort,
       FindCourseContentPort findCourseContentPort,
-      CourseContentDTOMapper courseContentDTOMapper
+      CourseContentDTOMapper courseContentDTOMapper,
+      CourseManagementService courseManagementService
   ) {
     return new CourseContentManagementService(createCourseContentPort, findCourseContentPort,
-        courseContentDTOMapper);
+        courseContentDTOMapper,courseManagementService);
   }
 
 }

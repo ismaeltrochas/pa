@@ -9,10 +9,11 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {
-        CourseContentRequestMapper.class
+        CourseRequestMapper.class
 }, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface CourseContentRequestMapper extends EntityToDto<CourseContentDTO, CourseContentRequest> {
 
     @Mapping(source = "courseId", target = "course.id")
+    @Mapping(source = "title", target = "title")
     CourseContentDTO toEntity(CourseContentRequest courseContentRequest);
 }

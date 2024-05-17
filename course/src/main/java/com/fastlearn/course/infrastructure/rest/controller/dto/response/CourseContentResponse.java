@@ -1,19 +1,19 @@
 package com.fastlearn.course.infrastructure.rest.controller.dto.response;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @Getter
-@Builder
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CourseContentResponse {
 
-  private String id;
-  private String name;
+  private Long id;
+  private String title;
   private List<VideoResponse> videoResponses;
+  private LocalDateTime createdAt;
 
 }

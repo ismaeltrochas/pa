@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface CourseContentResponseMapper extends
-    EntityToDto<CourseContentDTO, CourseContentResponse> {
+        EntityToDto<CourseContentDTO, CourseContentResponse> {
+
+
 
 }
