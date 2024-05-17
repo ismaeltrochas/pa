@@ -2,6 +2,7 @@ package com.fastlearn.course.infrastructure.rest.controller;
 
 import com.fastlearn.course.application.video.VideoManagementService;
 import com.fastlearn.course.domain.model.dto.FileUploadDTO;
+import com.fastlearn.course.infrastructure.configuration.feignclient.VideoFeignClientService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,8 @@ import java.util.stream.Collectors;
 public class VideoController {
 
     private final VideoManagementService videoManagementService;
+    private final VideoFeignClientService videoFeignClientService;
+
 
     @PostMapping(path = "/upload-content/{id}")
     public ResponseEntity<List<FileUploadDTO>> uploadFile(
@@ -37,4 +40,9 @@ public class VideoController {
         return new ResponseEntity<>(videoManagementService.getFileById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/saludo")
+    public String saludo() {
+        log.info("Se consume el servicio correctamente.");
+        return videoFeignClientService.greetings();
+    }
 }

@@ -1,5 +1,6 @@
 package com.fastlearn.course.domain.model.dto;
 
+import com.fastlearn.course.domain.model.CourseContent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,9 @@ import java.util.List;
 @Setter
 public class CourseContentDTO {
 
+    private Long id;
     private String title;
     private CourseDTO course;
+    private List<CourseContent> videoResponses;
     private LocalDateTime createdAt;
 }

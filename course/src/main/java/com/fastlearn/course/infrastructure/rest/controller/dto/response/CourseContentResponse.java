@@ -1,5 +1,6 @@
 package com.fastlearn.course.infrastructure.rest.controller.dto.response;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import lombok.*;
@@ -13,5 +14,6 @@ public class CourseContentResponse {
   private Long id;
   private String title;
   private List<VideoResponse> videoResponses;
+  private LocalDateTime createdAt;
 
 }

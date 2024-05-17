@@ -15,6 +15,5 @@ public class CourseResponse {
     private String description;
     private String owner;
     private Double price;
-    private List<CourseContentResponse> courseContent;
 
 }

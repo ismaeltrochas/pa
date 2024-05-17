@@ -1,10 +1,8 @@
 package com.fastlearn.course.infrastructure.rest.controller;
 
 import com.fastlearn.course.application.course.service.CourseManagementService;
-import com.fastlearn.course.application.coursecontent.service.CourseContentManagementService;
 import com.fastlearn.course.domain.model.dto.CourseDTO;
 import com.fastlearn.course.infrastructure.rest.controller.dto.response.CourseResponse;
-import com.fastlearn.course.infrastructure.rest.controller.mapper.response.CourseContentResponseMapper;
 import com.fastlearn.course.infrastructure.rest.controller.mapper.response.CourseResponseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,19 +18,11 @@ public class CourseController {
 
     private final CourseManagementService courseManagementService;
     private final CourseResponseMapper courseResponseMapper;
-    private final CourseContentManagementService courseContentManagementService;
-    private final CourseContentResponseMapper courseContentResponseMapper;
 
- // @GetMapping(path = "/find/{id}")
- // public ResponseEntity<CourseResponse> findAllCourseById(@PathVariable Long id) {
- //     CourseResponse courseResponse = courseResponseMapper.toDto(courseManagementService.findById(id));
- //     courseResponse.setCourseContent(
- //             courseContentResponseMapper.toDto(
- //                     courseContentManagementService.courseContentEntities(
- //                             courseResponse.getId())));
-
- //     return new ResponseEntity<>(courseResponse, HttpStatus.OK);
- // }
+    @GetMapping(path = "/find/{id}")
+    public ResponseEntity<CourseResponse> findAllCourseById(@PathVariable Long id) {
+        return new ResponseEntity<>(courseResponseMapper.toDto(courseManagementService.findById(id)), HttpStatus.OK);
+    }
 
     @GetMapping(path = "/findAllByOwnerName")
     public ResponseEntity<List<CourseDTO>> findAllByOwner(

@@ -24,4 +24,7 @@ public interface VideoFeignClientService {
   @GetMapping(path = "/get/{id}")
   List<FileUploadDTO> getFileById(@PathVariable("id") Long id);
 
+  @GetMapping(path = "/get/greetings")
+  String greetings();
+
 }
