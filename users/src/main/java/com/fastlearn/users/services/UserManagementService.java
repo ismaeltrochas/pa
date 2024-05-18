@@ -1,10 +1,11 @@
-package com.fastlearn.users.infrastructure.adapter.user;
+package com.fastlearn.users.services;
 
-import com.fastlearn.users.domain.model.UserDTO;
-import com.fastlearn.users.domain.port.KeycloakManagementPort;
-import com.fastlearn.users.infrastructure.configuration.keycloak.KeycloakProvider;
+import com.fastlearn.users.configuration.KeycloakProvider;
+import com.fastlearn.users.dao.KeycloakManagementPort;
+import com.fastlearn.users.dto.UserDTO;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.resource.RolesResource;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.admin.client.resource.UsersResource;
@@ -21,7 +22,7 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
-public class UserManagementAdapter implements KeycloakManagementPort {
+public class UserManagementService implements KeycloakManagementPort {
 
     @Override
     public List<UserRepresentation> findAllUsers() {
@@ -30,10 +31,10 @@ public class UserManagementAdapter implements KeycloakManagementPort {
 
     @Override
     public List<UserRepresentation> searchUserByUsername(String username) {
-        return KeycloakProvider.getRealmResource().users().search(username, false);
+        return KeycloakProvider.getRealmResource().users().search(username, true);
     }
 
-    public UserDTO createUser(@NonNull UserDTO userDTO) {
+    public String createUser(@NonNull UserDTO userDTO) {
 
         UserRepresentation userRepresentation = getUserRepresentation(userDTO);
 
@@ -45,18 +46,17 @@ public class UserManagementAdapter implements KeycloakManagementPort {
             List<UserRepresentation> representationList = usersResource.searchByUsername(
                     userDTO.getEmail(), true);
             //         emailVerification(userRepresentation.getId());
-            if (userDTO.getRoles().contains("TEACHER")) {
-                assignRoleToUser(userRepresentation.getId(), "TEACHER");
-            } else {
-                assignRoleToUser(userRepresentation.getId(), "USER");
-            }
+            userDTO.getRoles().forEach(role -> {
+                assignRoleToUser(userRepresentation.getId(), role);
+            });
+            emailVerification(userRepresentation.getId());
         }
 
-        return userDTO;
+        return "User created successfully!!";
     }
 
     private UsersResource getUsersResource() {
-        return KeycloakProvider.userResource();
+        return KeycloakProvider.getUsersResource();
     }
 
     private static UserRepresentation getUserRepresentation(UserDTO userDTO) {
@@ -79,14 +79,9 @@ public class UserManagementAdapter implements KeycloakManagementPort {
         return userRepresentation;
     }
 
-    @Override
-    public void deleteUser(String userId) {
-        KeycloakProvider.userResource().delete(userId);
-    }
-
-    @Override
-    public void updateUser(String userId, UserDTO userDTO) {
-
+    private void emailVerification(String userId) {
+        UsersResource usersResource = getUsersResource();
+        usersResource.get(userId).sendVerifyEmail();
     }
 
     private RoleRepresentation getRole(String role) {
@@ -105,5 +100,49 @@ public class UserManagementAdapter implements KeycloakManagementPort {
         UserResource userResource = usersResource.get(userId);
         RoleRepresentation representation = getRole(role);
         userResource.roles().realmLevel().add(Collections.singletonList(representation));
+    }
+
+
+    /**
+     * Metodo para borrar un usuario en keycloak
+     *
+     * @return void
+     */
+    public void deleteUser(String userId) {
+        KeycloakProvider.getUsersResource()
+                .get(userId)
+                .remove();
+    }
+
+
+    public UserRepresentation getUserRepresentation(String email) {
+        UsersResource userResource = KeycloakProvider.getUsersResource();
+        userResource.searchByUsername(email, true);
+        return userResource.get(email).toRepresentation();
+    }
+
+    /**
+     * Metodo para actualizar un usuario en keycloak
+     *
+     * @return non
+     */
+    public void updateUser(String userId, @NonNull UserDTO userDTO) {
+
+        CredentialRepresentation credentialRepresentation = new CredentialRepresentation();
+        credentialRepresentation.setTemporary(false);
+        credentialRepresentation.setType(OAuth2Constants.PASSWORD);
+        credentialRepresentation.setValue(userDTO.getPassword());
+
+        UserRepresentation user = new UserRepresentation();
+        user.setUsername(userDTO.getUsername());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEmail(userDTO.getEmail());
+        user.setEnabled(true);
+        user.setEmailVerified(true);
+        user.setCredentials(Collections.singletonList(credentialRepresentation));
+
+        UserResource usersResource = KeycloakProvider.getUsersResource().get(userId);
+        usersResource.update(user);
     }
 }

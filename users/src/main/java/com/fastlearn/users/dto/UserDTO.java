@@ -1,4 +1,4 @@
-package com.fastlearn.users.domain.model;
+package com.fastlearn.users.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
