@@ -1,4 +1,4 @@
-package com.fastlearn.users.infrastructure.configuration.keycloak;
+package com.fastlearn.users.configuration;
 
 import lombok.Getter;
 import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
@@ -39,7 +39,7 @@ public class KeycloakProvider {
         return keycloak.realm(realmName);
     }
 
-    public static UsersResource userResource() {
+    public static UsersResource getUsersResource() {
         RealmResource realmResource = getRealmResource();
         return realmResource.users();
     }
