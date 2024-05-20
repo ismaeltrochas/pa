@@ -1,13 +1,36 @@
 spring:
   application:
     name: fl-mcsv-users
-
+  datasource:
+    url: jdbc:postgresql://localhost:5433/db_keycloak
+    username: ismael
+    password: Test123
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/spring-course-realm
+          jwk-set-uri: http://localhost:8181/realms/spring-course-realm/protocol/openid-connect/certs
 
 keycloak:
   server_url: http://localhost:8181
-  realm_name: spring-courses
+  realm_name: spring-course-realm
   realm_master: master
   admin-cli: admin-cli
   user-console: admin
   password-console: admin
   client-secret: admin
+
+
+jwt:
+  auth:
+    converter:
+      resource-id: spring-course-realm
+      principle-attribute: preferred_username
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://localhost:8761
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance-id:${random.value}}
