@@ -1,7 +1,6 @@
 package com.fastlearn.users.configuration;
 
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -11,19 +10,19 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jwt.JwtClaimNames;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import org.springframework.stereotype.Component;
 
 @Component
 public class JWTAuthenticationConverter implements Converter<Jwt, AbstractAuthenticationToken> {
 
 
     private final JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter =
-        new JwtGrantedAuthoritiesConverter();
+            new JwtGrantedAuthoritiesConverter();
 
     @Value("${jwt.auth.converter.principle-attribute}")
     private String principleAttribute;
@@ -38,11 +37,13 @@ public class JWTAuthenticationConverter implements Converter<Jwt, AbstractAuthen
         return new JwtAuthenticationToken(jwt, authorities, getPrincipalClaimName(jwt));
     }
 
+    @SuppressWarnings("unchecked")
     private Collection<? extends GrantedAuthority> extractResourcesRoles(Jwt jwt) {
         Collection<String> resourceRoles;
 
-        Map<String, Object> resourceAccess = jwt.getClaim("realm_access");
-        resourceRoles = (Collection<String>) resourceAccess.get("roles");
+        Map<String, Object> resourceAccess = jwt.getClaim("resource_access");
+        Map<String, Object> keys = (Map<String, Object>) resourceAccess.get("spring-course-client");
+        resourceRoles = (Collection<String>) keys.get("roles");
 
         return resourceRoles
                 .stream()

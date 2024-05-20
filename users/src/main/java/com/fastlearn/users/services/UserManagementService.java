@@ -56,7 +56,7 @@ public class UserManagementService implements KeycloakManagementPort {
     }
 
     private UsersResource getUsersResource() {
-        return KeycloakProvider.getUsersResource();
+        return KeycloakProvider.getUserResource();
     }
 
     private static UserRepresentation getUserRepresentation(UserDTO userDTO) {
@@ -109,14 +109,14 @@ public class UserManagementService implements KeycloakManagementPort {
      * @return void
      */
     public void deleteUser(String userId) {
-        KeycloakProvider.getUsersResource()
+        KeycloakProvider.getUserResource()
                 .get(userId)
                 .remove();
     }
 
 
     public UserRepresentation getUserRepresentation(String email) {
-        UsersResource userResource = KeycloakProvider.getUsersResource();
+        UsersResource userResource = KeycloakProvider.getUserResource();
         userResource.searchByUsername(email, true);
         return userResource.get(email).toRepresentation();
     }
@@ -142,7 +142,7 @@ public class UserManagementService implements KeycloakManagementPort {
         user.setEmailVerified(true);
         user.setCredentials(Collections.singletonList(credentialRepresentation));
 
-        UserResource usersResource = KeycloakProvider.getUsersResource().get(userId);
+        UserResource usersResource = KeycloakProvider.getUserResource().get(userId);
         usersResource.update(user);
     }
 }

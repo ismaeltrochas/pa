@@ -13,33 +13,31 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "keycloak")
 @Getter
 public class KeycloakProvider {
-
-    private static String serverUrl;
-    private static String realmName;
-    private static String realmMaster;
-    private static String adminCli;
-    private static String userConsole;
-    private static String passwordConsole;
-    private static String clientSecret;
-
+    private static final String SERVER_URL = "http://localhost:8181";
+    private static final String REALM_NAME = "spring-course-realm";
+    private static final String REALM_MASTER = "master";
+    private static final String ADMIN_CLI = "admin-cli";
+    private static final String USER_CONSOLE = "admin";
+    private static final String PASSWORD_CONSOLE = "admin";
+    private static final String CLIENT_SECRET = "admin";
 
     public static RealmResource getRealmResource() {
         Keycloak keycloak = KeycloakBuilder.builder()
-                .serverUrl(serverUrl)
-                .realm(realmName)
-                .clientId(adminCli)
-                .username(userConsole)
-                .password(passwordConsole)
-                .clientSecret(clientSecret)
+                .serverUrl(SERVER_URL)
+                .realm(REALM_MASTER)
+                .clientId(ADMIN_CLI)
+                .username(USER_CONSOLE)
+                .password(PASSWORD_CONSOLE)
+                .clientSecret(CLIENT_SECRET)
                 .resteasyClient(new ResteasyClientBuilderImpl()
                         .connectionPoolSize(10)
                         .build())
                 .build();
 
-        return keycloak.realm(realmName);
+        return keycloak.realm(REALM_NAME);
     }
 
-    public static UsersResource getUsersResource() {
+    public static UsersResource getUserResource() {
         RealmResource realmResource = getRealmResource();
         return realmResource.users();
     }
