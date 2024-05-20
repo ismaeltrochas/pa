@@ -49,7 +49,7 @@ public class UserManagementService implements KeycloakManagementPort {
             userDTO.getRoles().forEach(role -> {
                 assignRoleToUser(userRepresentation.getId(), role);
             });
-            emailVerification(userRepresentation.getId());
+            // emailVerification(userRepresentation.getId());
         }
 
         return "User created successfully!!";
