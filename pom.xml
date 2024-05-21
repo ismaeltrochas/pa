@@ -21,6 +21,7 @@
         <module>media-uploader</module>
         <module>notification</module>
         <module>users</module>
+        <module>student</module>
     </modules>
 
     <properties>
