@@ -1,6 +1,5 @@
 package com.fastlearn.users.configuration;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,22 +15,22 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-  @Autowired
-  private JWTAuthenticationConverter jwtAuthenticationConverter;
+    @Autowired
+    private JWTAuthenticationConverter jwtAuthenticationConverter;
 
-  @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-    return httpSecurity
-        .csrf(AbstractHttpConfigurer::disable)
-        .authorizeHttpRequests(http -> {
-          http.requestMatchers("/auth-controller/**").permitAll()
-              .anyRequest().authenticated();
-        })
-        .oauth2ResourceServer(oauth -> {
-          oauth.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter));
-        })
-        .sessionManagement(
-            session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .build();
-  }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        return httpSecurity
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(http -> {
+                  http.requestMatchers("/auth-controller/create").permitAll()
+                            .anyRequest().authenticated();
+                })
+                .oauth2ResourceServer(oauth -> {
+                    oauth.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter));
+                })
+                .sessionManagement(
+                        session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .build();
+    }
 }
