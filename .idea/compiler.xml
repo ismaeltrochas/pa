@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="media-uploader" />
-        <module name="student" />
         <module name="eureka" />
         <module name="gateway" />
         <module name="users" />
@@ -24,6 +23,7 @@
         </processorPath>
         <module name="course" />
         <module name="notification" />
+        <module name="student" />
       </profile>
     </annotationProcessing>
   </component>
