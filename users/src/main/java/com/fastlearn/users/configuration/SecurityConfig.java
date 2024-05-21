@@ -23,7 +23,7 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(http -> {
-                    http.requestMatchers("/auth-controller/**").authenticated()
+                  http.requestMatchers("/auth-controller/create").permitAll()
                             .anyRequest().authenticated();
                 })
                 .oauth2ResourceServer(oauth -> {
