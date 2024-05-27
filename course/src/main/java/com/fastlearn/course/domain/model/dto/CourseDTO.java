@@ -16,4 +16,6 @@ public class CourseDTO {
   private String description;
   private String owner;
   private Double price;
+  private String imgUrl;
+
 }

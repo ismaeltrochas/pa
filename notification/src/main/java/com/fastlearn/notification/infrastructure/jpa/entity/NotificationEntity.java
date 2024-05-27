@@ -20,9 +20,9 @@ public class NotificationEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     private String text;
-    private String from;
+    private String sender;
     private String subject;
-    private String to;
+    private String receiver;
     private LocalDateTime createdAt;
     private boolean readStatus;
 

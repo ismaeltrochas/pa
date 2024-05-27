@@ -73,15 +73,18 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: admin
       KC_HTTP_PORT: 8181
 
-  db-users:
-    container_name: db_users
+  db-enrolls:
+    container_name: db_enroll
     image: postgres:15.2
     restart: unless-stopped
     environment:
-      POSTGRES_DB: db-users
+      POSTGRES_DB: db_enrolls
       POSTGRES_USER: ismael
       POSTGRES_PASSWORD: Test123
     ports:
       - "5436:5436"
     command:
       -p 5436
+
+
+

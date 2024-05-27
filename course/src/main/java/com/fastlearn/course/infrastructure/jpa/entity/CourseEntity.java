@@ -1,12 +1,8 @@
 package com.fastlearn.course.infrastructure.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,5 +24,7 @@ public class CourseEntity {
   private String description;
   private String owner;
   private Double price;
+  @Column(columnDefinition = "text")
+  private String imgUrl;
 
 }

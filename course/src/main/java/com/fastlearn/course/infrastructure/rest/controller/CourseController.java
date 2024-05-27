@@ -2,7 +2,9 @@ package com.fastlearn.course.infrastructure.rest.controller;
 
 import com.fastlearn.course.application.course.service.CourseManagementService;
 import com.fastlearn.course.domain.model.dto.CourseDTO;
+import com.fastlearn.course.infrastructure.rest.controller.dto.request.CourseRequest;
 import com.fastlearn.course.infrastructure.rest.controller.dto.response.CourseResponse;
+import com.fastlearn.course.infrastructure.rest.controller.mapper.request.CourseRequestMapper;
 import com.fastlearn.course.infrastructure.rest.controller.mapper.response.CourseResponseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ public class CourseController {
 
     private final CourseManagementService courseManagementService;
     private final CourseResponseMapper courseResponseMapper;
+    private final CourseRequestMapper courseRequestMapper;
 
     @GetMapping(path = "/find/{id}")
     public ResponseEntity<CourseResponse> findAllCourseById(@PathVariable Long id) {
@@ -36,5 +39,9 @@ public class CourseController {
                 HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<CourseResponse> createCourse(@RequestBody CourseRequest courseRequest) {
+        return new ResponseEntity<>(courseResponseMapper.toDto(courseManagementService.createCourse(courseRequestMapper.toEntity(courseRequest))), HttpStatus.CREATED);
+    }
 
 }
