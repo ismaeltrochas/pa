@@ -13,11 +13,14 @@ spring:
   application:
     name: fl-mcsv-media
   datasource:
-    url: jdbc:postgresql://localhost:5434/db-course
-    username: ismael
-    password: Test123
+    url: jdbc:postgresql://viaduct.proxy.rlwy.net:15260/railway
+    username: postgres
+    password: veptjqHqvLXaLTdjxfirILaEMgRKyLqS
     test-on-borrow: false
     validation-query: SELECT 1 FROM dual
+  jpa:
+    hibernate:
+      ddl-auto: update
   servlet:
     multipart:
       max-file-size: 10MB

@@ -4,9 +4,9 @@ spring:
   application:
     name: fl-mcsv-course
   datasource:
-    url: jdbc:postgresql://localhost:5434/db-course
-    username: ismael
-    password: Test123
+    url: jdbc:postgresql://viaduct.proxy.rlwy.net:15260/railway
+    username: postgres
+    password: veptjqHqvLXaLTdjxfirILaEMgRKyLqS
   jpa:
     hibernate:
       ddl-auto: update

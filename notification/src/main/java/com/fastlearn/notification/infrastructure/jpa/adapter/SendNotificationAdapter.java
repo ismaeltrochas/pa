@@ -19,7 +19,7 @@ public class SendNotificationAdapter implements SendNotificationUserPort {
 
     @Override
     public Notification sendNotification(Notification notification) throws MessagingException {
-        emailSenderPort.sendEmail(notification.getTo(), notification.getSubject(), notification.getText());
+        emailSenderPort.sendEmail(notification.getReceiver(), notification.getSubject(), notification.getText());
         return notificationRepositoryMapper.toEntity(
                 notificationEntityRepository.save(
                         notificationRepositoryMapper.toDTO(notification)));

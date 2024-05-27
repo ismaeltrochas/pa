@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
  	<artifactId>media-uploader</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>media-uploader</name>
 	<description>Spring Boot project made for the storage of multi media</description>
 	<properties>
@@ -49,10 +49,7 @@
       <artifactId>s3</artifactId>
       <version>2.20.109</version>
     </dependency>
-		<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-		</dependency>
+
 	<dependency>
 		<groupId>org.springframework.cloud</groupId>
 		<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>

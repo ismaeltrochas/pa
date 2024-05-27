@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface NotificationEntityRepository extends JpaRepository<NotificationEntity, String> {
 
-    List<NotificationEntity> findByTo(String to);
+    List<NotificationEntity> findByReceiver(String to);
 }

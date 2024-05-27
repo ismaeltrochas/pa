@@ -17,6 +17,8 @@ public class Course {
   private String description;
   private String owner;
   private Double price;
+  private String imgUrl;
   private List<CourseContent> courseContents;
   private Status status;
+
 }
